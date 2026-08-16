@@ -35,11 +35,44 @@ body {
     .dropdownMenu {
       height: 25px;
       width: 70px;
-     
 
-      .menu {
-        color: white;
-        background: hsl(240deg 25% 20.39%);
+      .containerIconsAndButton {
+        display: flex;
+        width: 100px;
+
+        .arrowDown {
+          color: white;
+        }
+
+        .menu {
+          display: flex;
+          justify-content: space-between;
+          color: white;
+          width: 80px;
+          background: hsl(240deg 25% 20.39%);
+        }
+      }
+
+      .popupWindow {
+        position: absolute;
+        right: 68px;
+        width: 150px;
+        border-radius: 10px;
+        margin-top: 10px;
+        padding: 10px;
+        background: hsl(240, 26%, 19.61%);
+
+        button {
+          font-size: 11px;
+          color: white;
+          border: none;
+          background-color: hsl(240deg 26% 19.61%);
+        }
+
+        p {
+          font-size: 10px;
+          color: hsl(243deg 9.9% 60.39%);
+        }
       }
     }
   }
