@@ -27,21 +27,22 @@ function App() {
 
           {abierto && (
             <div className='popupWindow'>
-              <button>Switch to imperial</button>
+              <button>Switch to Imperial</button>
 
               <p>Temperature</p>
-
-              <button>Celsius (°C) ✓</button>
+              <button className="selected">Celsius (°C)</button>
               <button>Fahrenheit (°F)</button>
 
-              <p>Wind Speed</p>
+              <div className="separator"></div>
 
-              <button>km/h ✓</button>
+              <p>Wind Speed</p>
+              <button className="selected">km/h</button>
               <button>mph</button>
 
-              <p>Precipitation</p>
+              <div className="separator"></div>
 
-              <button>Milimeters</button>
+              <p>Precipitation</p>
+              <button className="selected">Millimeters (mm)</button>
             </div>
           )}
         </div>
