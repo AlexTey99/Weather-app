@@ -4,13 +4,21 @@ import { useState } from 'react';
 
 import { FiChevronDown } from "react-icons/fi";
 
-
+import  SelectAdjust  from './components/SelectAdjust/SelectAdjust'
 import logoHeader from './design/images/logo.svg'
 import iconSetting from './design/images/icon-units.svg'
+import { useFetchWeather } from './hooks/useFetchWeather';
 
 function App() {
-  const [abierto, setAbierto] = useState(false);
+  const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m";
 
+  const [open, setOpen] = useState(false);
+  const { data} = useFetchWeather(APIURL)
+  console.log(data)
+
+  const switchSelect = (param:boolean) => {
+    setOpen(!param)
+  }
 
   return (
     <div className="mainContainer">
@@ -20,30 +28,13 @@ function App() {
 
         <div className='dropdownMenu'>
           <div className="containerIconsAndButton">
-            <button className='menu' onClick={() => setAbierto(!abierto)}>
+            <button className='menu' onClick={() => switchSelect(open)}>
               <img src={iconSetting} alt="" />Units
               <FiChevronDown className='arrowDown' /></button>
           </div>
 
-          {abierto && (
-            <div className='popupWindow'>
-              <button>Switch to Imperial</button>
-
-              <p>Temperature</p>
-              <button className="selected">Celsius (°C)</button>
-              <button>Fahrenheit (°F)</button>
-
-              <div className="separator"></div>
-
-              <p>Wind Speed</p>
-              <button className="selected">km/h</button>
-              <button>mph</button>
-
-              <div className="separator"></div>
-
-              <p>Precipitation</p>
-              <button className="selected">Millimeters (mm)</button>
-            </div>
+          {open && (
+              <SelectAdjust/>
           )}
         </div>
 
