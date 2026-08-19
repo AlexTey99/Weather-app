@@ -1,3 +1,7 @@
+@use './styles/colors.scss';
+
+
+
 @font-face {
   font-family: "Bricolage Grotesque";
   src: url("./fonts/BricolageGrotesque-Bold.ttf") format("truetype");
@@ -16,9 +20,12 @@ body {
 }
 
 .mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
   width: 100%;
-  background: hsl(241.43deg 95.45% 8.63%);
+  background: colors.$deepNavyBlue;
 
   .headerContainer {
     display: flex;
@@ -42,19 +49,19 @@ body {
         width: 100px;
 
         .arrowDown {
-          color: white;
+          color: colors.$white;
         }
 
         .menu {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          color: white;
+          color: colors.$white;
           height: 30px;
           width: 90px;
-          border: 1px solid hsl(240, 25%, 20.39%);
+          border: 1px solid colors.$darkBluePurple;
           border-radius: 5px;
-          background: hsl(240, 25%, 20.39%);
+          background: colors.$darkBluePurple;
         }
       }
 
@@ -66,7 +73,7 @@ body {
         margin-top: 10px;
         border-radius: 10px;
 
-        background: hsl(240, 26%, 19.61%);
+        background: colors.$darkBluePurple;
 
         display: flex;
         flex-direction: column;
@@ -81,7 +88,7 @@ body {
 
           text-align: left;
           font-size: 12px;
-          color: white;
+          color: colors.$white;
 
           border: none;
           border-radius: 6px;
@@ -90,17 +97,17 @@ body {
           cursor: pointer;
 
           &:hover {
-            background: hsl(240, 20%, 23%);
+            background: colors.$darkSlateBlue;
           }
 
           &.selected {
-            background: hsl(240, 20%, 25%);
+            background: colors.$blueGrayDark;
 
             &::after {
               content: "✓";
               position: absolute;
               right: 8px;
-              color: white;
+              color: colors.$white;
             }
           }
         }
@@ -108,20 +115,57 @@ body {
         .separator {
           height: 1px;
           margin: 4px 0;
-          background-color: hsl(240, 15%, 27%);
+          background-color: colors.$darkSlate;
         }
 
         p {
           margin: 8px 6px 4px;
-          color: hsl(240, 10%, 65%);
+          color: colors.$blueGray;
           font-size: 12px;
         }
 
         hr {
           border: none;
-          border-top: 1px solid #555;
+          border-top: 1px solid colors.$gray;
           margin: 10px 0;
         }
+      }
+    }
+  }
+
+  .containerTittleAndSeeker {
+    text-align: center;
+
+    h1 {
+      font-size: 44px;
+      color: colors.$white;
+    }
+
+    .search {
+
+      input {
+        height: 40px;
+        width: 430px;
+        padding: 10px;
+        margin-right: 16px;
+        border: 1px solid colors.$darkBluePurple;
+        border-radius: 10px;
+        color: colors.$white;
+        background: colors.$darkBluePurple;
+
+        &::placeholder {
+          color: colors.$white;
+        }
+      }
+
+      button {
+        height: 40px;
+        width: 70px;
+        border: 1px solid colors.$indigoBlue;
+        border-radius: 10px;
+        color: colors.$white;
+        background: colors.$indigoBlue;
+        cursor: pointer;
       }
     }
   }

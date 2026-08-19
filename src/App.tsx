@@ -49,6 +49,24 @@ function App() {
 
       </div>
 
+
+      <div className="containerTittleAndSeeker">
+        <h1>How's the sky looking today?</h1>
+
+        <form className="search">
+
+          <input
+            type="search"
+            id="search-input"
+            name="q"
+            placeholder="Search for a place..."
+          />
+
+          <button type="submit">
+            Search
+          </button>
+        </form>
+      </div>
     </div>
 
   )
