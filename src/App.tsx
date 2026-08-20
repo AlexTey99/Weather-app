@@ -66,8 +66,8 @@ function App() {
           <div className="containerTittleAndSelect">
             <h2>Hourly forecast</h2>
 
-            <div className="containerIconsAndButton">
-              <button className='menu' onClick={() => setWeekDays(!weekDays)}>
+            <div className="containerIconsAndButtonBelow">
+              <button className='buttonSelectWeek' onClick={() => setWeekDays(!weekDays)}>
                 {selectedDay}
                 <FiChevronDown className='arrowDown' /></button>
             </div>
