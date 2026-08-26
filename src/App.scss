@@ -176,7 +176,7 @@ body {
   .containerTheTime {
     display: flex;
     justify-content: space-between;
-    height: 100%;
+    height: 600px;
     width: 100%;
     margin-top: 30px;
     border-radius: 30px;
@@ -193,6 +193,7 @@ body {
 
     .containerHourlyForecast {
       display: flex;
+      flex-direction: column;
       height: 100%;
       width: 30%;
       padding: 20px;
@@ -260,6 +261,29 @@ body {
 
       }
 
+      .containerHours {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 12px;
+        height: 500px;
+        width: 100%;
+        margin-top: 16px;
+        padding: 10px 16px 0px 0px;
+        overflow-y: auto;
+       
+        .containerHoursGrade {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 50px;
+          width: auto;
+          padding: 14px;
+          flex-shrink: 0;
+          color: colors.$white;
+          background: colors.$cardBackground;
+        }
+      }
     }
   }
 

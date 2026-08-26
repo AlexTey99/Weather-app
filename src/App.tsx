@@ -15,7 +15,7 @@ function App() {
   const [weekDays, setWeekDays] = useState(false);
   const [selectedDay, setSelectedDay] = useState('Select day');
   const { data } = useFetchWeather(APIURL)
-  console.log(data)
+  const hourlysDay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 
   const switchSelect = (param: boolean) => {
     setOpen(!param)
@@ -79,6 +79,19 @@ function App() {
               />
             )}
           </div>
+
+          <div className="containerHours">
+
+            {data?.hourly.relative_humidity_2m.slice(0, 24).map((temperature, index) => (
+              <div className="containerHoursGrade" key={index}>
+                <div className="hours">
+                  {hourlysDay[index]} PM
+                </div>
+                {temperature}°
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
 
