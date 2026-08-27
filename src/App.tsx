@@ -65,6 +65,11 @@ function App() {
         <div className="containerInfoTime">
           <div className="topContainer">
 
+            <div className="firsPoint"></div>
+            <div className="secondPoint"></div>
+            <div className="thirdPoint"></div>
+            <div className="fourthPoint"></div>
+
             <div className="backgroundShape shape1"></div>
             <div className="backgroundShape shape2"></div>
 

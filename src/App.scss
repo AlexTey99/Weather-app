@@ -206,6 +206,50 @@ body {
         align-items: center;
         justify-content: space-between;
 
+        .firsPoint {
+          position: absolute;
+          top: 50px;
+          left: 68px;
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          background: colors.$whiteLow;
+          box-shadow: 0 0 6px 2px colors.$whiteLow;
+        }
+
+        .secondPoint {
+          position: absolute;
+          top: 30px;
+          left: 450px;
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          background: colors.$weatherOrange;
+          box-shadow: 0 0 6px colors.$weatherOrange;
+        }
+
+        .thirdPoint {
+          position: absolute;
+          bottom: 50px;
+          left: 330px;
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          background: colors.$weatherOrange;
+          box-shadow: 0 0 6px colors.$weatherOrange;
+        }
+
+        .fourthPoint {
+          position: absolute;
+          bottom: 20px;
+          right: 170px;
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          background: colors.$whiteLow;
+          box-shadow: 0 0 6px 2px colors.$whiteLow;
+        }
+
         .backgroundShape {
           position: absolute;
 
