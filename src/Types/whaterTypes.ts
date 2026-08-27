@@ -9,6 +9,7 @@ export type HourlyWeather = {
   wind_speed_10m: number[];
   temperature_2m: number[];
   relative_humidity_2m: number[];
+  weather_code: number[];
 }
 
 export type HourlyUnitsWeather = {

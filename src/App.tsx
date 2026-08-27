@@ -7,9 +7,10 @@ import SelectDayWeek from '../src/components/Select/Select'
 import logoHeader from './design/images/logo.svg'
 import iconSetting from './design/images/icon-units.svg'
 import { useFetchWeather } from './hooks/useFetchWeather';
+import WeatherIcon from './components/GetWeatherIcon/GetWeatherIcon';
 
 function App() {
-  const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m";
+  const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
 
   const [open, setOpen] = useState(false);
   const [weekDays, setWeekDays] = useState(false);
@@ -82,11 +83,13 @@ function App() {
 
           <div className="containerHours">
 
-            {data?.hourly.relative_humidity_2m.slice(0, 24).map((temperature, index) => (
+            {data?.hourly.temperature_2m.slice(0, 24).map((temperature, index) => (
               <div className="containerHoursGrade" key={index}>
                 <div className="hours">
-                  {hourlysDay[index]} PM
+                  <WeatherIcon code={data.hourly.weather_code[index]} />
+                  {hourlysDay[index]} PM  
                 </div>
+
                 {temperature}°
               </div>
             ))}

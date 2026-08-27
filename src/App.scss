@@ -283,6 +283,10 @@ body {
           color: colors.$white;
           background: colors.$cardBackground;
         }
+
+        span {
+          margin-right: 4px;
+        }
       }
     }
   }
