@@ -189,6 +189,79 @@ body {
       width: 65%;
       border-radius: 30px;
       background: blue;
+
+
+      .topContainer {
+        position: relative;
+        height: 230px;
+        border-radius: 16px;
+        padding: 30px;
+        overflow: hidden;
+
+        background: linear-gradient(135deg,
+            colors.$indigoBlue,
+            colors.$weatherPurple );
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .backgroundShape {
+          position: absolute;
+
+          border-radius: 50%;
+        }
+
+        .shape1 {
+          width: 500px;
+          height: 150px;
+
+          left: -100px;
+          bottom: -120px;
+
+          background: rgba(80, 90, 220, 0.4);
+        }
+
+        .shape2 {
+          width: 300px;
+          height: 120px;
+
+          right: -100px;
+          bottom: -90px;
+
+          background: rgba(80, 90, 220, 0.2);
+        }
+
+        .contianerIconTemperature {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+
+          .icon {
+            font-size: 30px;
+          }
+
+          .temperature {
+            font-size: 60px;
+            color: colors.$white;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .midleContainer {
+        display: flex;
+        height: 30%;
+        width: 100%;
+        background: purple;
+      }
+
+      .lastContainer {
+        display: flex;
+        height: 30%;
+        width: 100%;
+        background: lawngreen;
+      }
     }
 
     .containerHourlyForecast {
@@ -271,7 +344,7 @@ body {
         margin-top: 16px;
         padding: 10px 16px 0px 0px;
         overflow-y: auto;
-       
+
         .containerHoursGrade {
           display: flex;
           align-items: center;

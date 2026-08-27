@@ -10,7 +10,7 @@ import { useFetchWeather } from './hooks/useFetchWeather';
 import WeatherIcon from './components/GetWeatherIcon/GetWeatherIcon';
 
 function App() {
-  const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
+  const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
 
   const [open, setOpen] = useState(false);
   const [weekDays, setWeekDays] = useState(false);
@@ -62,7 +62,32 @@ function App() {
       </div>
 
       <div className="containerTheTime">
-        <div className="containerInfoTime"></div>
+        <div className="containerInfoTime">
+          <div className="topContainer">
+
+            <div className="backgroundShape shape1"></div>
+            <div className="backgroundShape shape2"></div>
+
+            <div className="countryAndDay">
+              <h2>Berlin, Germany</h2>
+              <p>Tuesday, Aug 5, 2025</p>
+            </div>
+            <div className="contianerIconTemperature">
+
+              <div className="icon">
+                <WeatherIcon code={data?.current.weather_code ?? 0} />
+              </div>
+
+              <div className="temperature">
+                {data?.current.temperature_2m}°
+              </div>
+
+            </div>
+
+          </div>
+          <div className="midleContainer"></div>
+          <div className="lastContainer"></div>
+        </div>
         <div className="containerHourlyForecast">
           <div className="containerTittleAndSelect">
             <h2>Hourly forecast</h2>
@@ -87,7 +112,7 @@ function App() {
               <div className="containerHoursGrade" key={index}>
                 <div className="hours">
                   <WeatherIcon code={data.hourly.weather_code[index]} />
-                  {hourlysDay[index]} PM  
+                  {hourlysDay[index]} PM
                 </div>
 
                 {temperature}°
