@@ -75,7 +75,14 @@ function App() {
 
             <div className="countryAndDay">
               <h2>Berlin, Germany</h2>
-              <p>Tuesday, Aug 5, 2025</p>
+              <p>
+                {new Date(data?.current.time ?? new Date()).toLocaleDateString("en-US", {
+                  weekday: "long",
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric"
+                })}
+              </p>
             </div>
             <div className="contianerIconTemperature">
 
