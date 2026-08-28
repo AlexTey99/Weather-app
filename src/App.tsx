@@ -8,6 +8,8 @@ import logoHeader from './design/images/logo.svg'
 import iconSetting from './design/images/icon-units.svg'
 import { useFetchWeather } from './hooks/useFetchWeather';
 import WeatherIcon from './components/GetWeatherIcon/GetWeatherIcon';
+import CurrentWeatherIcons from './components/CurrentWeatherIcons/CurrentWeatherIcons';
+import CloudIcons from './components/CurrentWeatherIcons/CloudIcons';
 
 function App() {
   const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
@@ -65,13 +67,7 @@ function App() {
         <div className="containerInfoTime">
           <div className="topContainer">
 
-            <div className="firsPoint"></div>
-            <div className="secondPoint"></div>
-            <div className="thirdPoint"></div>
-            <div className="fourthPoint"></div>
-
-            <div className="backgroundShape shape1"></div>
-            <div className="backgroundShape shape2"></div>
+            
 
             <div className="countryAndDay">
               <h2>Berlin, Germany</h2>
@@ -84,6 +80,10 @@ function App() {
                 })}
               </p>
             </div>
+
+            <CurrentWeatherIcons />
+            <CloudIcons />
+
             <div className="contianerIconTemperature">
 
               <div className="icon">
@@ -95,7 +95,7 @@ function App() {
               </div>
 
             </div>
-
+                
           </div>
           <div className="midleContainer"></div>
           <div className="lastContainer"></div>
