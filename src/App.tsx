@@ -10,6 +10,7 @@ import { useFetchWeather } from './hooks/useFetchWeather';
 import WeatherIcon from './components/GetWeatherIcon/GetWeatherIcon';
 import CurrentWeatherIcons from './components/CurrentWeatherIcons/CurrentWeatherIcons';
 import CloudIcons from './components/CurrentWeatherIcons/CloudIcons';
+import WeatherStats from './components/WeatherStats/WeatherStats';
 
 function App() {
   const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
@@ -27,113 +28,119 @@ function App() {
   return (
     <div className="mainContainer">
 
-      <div className="headerContainer">
-        <img src={logoHeader} alt="" />
+      <div className="centerContainer">
 
-        <div className='dropdownMenu'>
-          <div className="containerIconsAndButton">
-            <button className='menu' onClick={() => switchSelect(open)}>
-              <img src={iconSetting} alt="" />Units
-              <FiChevronDown className='arrowDown' /></button>
-          </div>
+        <div className="headerContainer">
+          <img src={logoHeader} alt="" />
 
-          {open && (
-            <SelectAdjust />
-          )}
-        </div>
-
-      </div>
-
-
-      <div className="containerTittleAndSeeker">
-        <h1>How's the sky looking today?</h1>
-
-        <form className="search">
-
-          <input
-            type="search"
-            id="search-input"
-            name="q"
-            placeholder="Search for a place..."
-          />
-
-          <button type="submit">
-            Search
-          </button>
-        </form>
-      </div>
-
-      <div className="containerTheTime">
-        <div className="containerInfoTime">
-          <div className="topContainer">
-
-            
-
-            <div className="countryAndDay">
-              <h2>Berlin, Germany</h2>
-              <p>
-                {new Date(data?.current.time ?? new Date()).toLocaleDateString("en-US", {
-                  weekday: "long",
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric"
-                })}
-              </p>
-            </div>
-
-            <CurrentWeatherIcons />
-            <CloudIcons />
-
-            <div className="contianerIconTemperature">
-
-              <div className="icon">
-                <WeatherIcon code={data?.current.weather_code ?? 0} />
-              </div>
-
-              <div className="temperature">
-                {data?.current.temperature_2m}°
-              </div>
-
-            </div>
-                
-          </div>
-          <div className="midleContainer"></div>
-          <div className="lastContainer"></div>
-        </div>
-        <div className="containerHourlyForecast">
-          <div className="containerTittleAndSelect">
-            <h2>Hourly forecast</h2>
-
-            <div className="containerIconsAndButtonBelow">
-              <button className='buttonSelectWeek' onClick={() => setWeekDays(!weekDays)}>
-                {selectedDay}
+          <div className='dropdownMenu'>
+            <div className="containerIconsAndButton">
+              <button className='menu' onClick={() => switchSelect(open)}>
+                <img src={iconSetting} alt="" />Units
                 <FiChevronDown className='arrowDown' /></button>
             </div>
 
-            {weekDays && (
-              <SelectDayWeek
-                setSelectedDay={setSelectedDay}
-                setWeekDays={setWeekDays}
-              />
+            {open && (
+              <SelectAdjust />
             )}
           </div>
 
-          <div className="containerHours">
+        </div>
 
-            {data?.hourly.temperature_2m.slice(0, 24).map((temperature, index) => (
-              <div className="containerHoursGrade" key={index}>
-                <div className="hours">
-                  <WeatherIcon code={data.hourly.weather_code[index]} />
-                  {hourlysDay[index]} PM
+
+        <div className="containerTittleAndSeeker">
+          <h1>How's the sky looking today?</h1>
+
+          <form className="search">
+
+            <input
+              type="search"
+              id="search-input"
+              name="q"
+              placeholder="Search for a place..."
+            />
+
+            <button type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <div className="containerTheTime">
+          <div className="containerInfoTime">
+            <div className="topContainer">
+
+              <div className="countryAndDay">
+                <h2>Berlin, Germany</h2>
+                <p>
+                  {new Date(data?.current.time ?? new Date()).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                  })}
+                </p>
+              </div>
+
+              <CurrentWeatherIcons />
+              <CloudIcons />
+
+              <div className="contianerIconTemperature">
+
+                <div className="icon">
+                  <WeatherIcon code={data?.current.weather_code ?? 0} />
                 </div>
 
-                {temperature}°
-              </div>
-            ))}
-          </div>
+                <div className="temperature">
+                  {data?.current.temperature_2m}°
+                </div>
 
+              </div>
+
+            </div>
+
+            <WeatherStats />
+
+            <div className="lastContainer"></div>
+          </div>
+          <div className="containerHourlyForecast">
+            <div className="containerTittleAndSelect">
+              <h2>Hourly forecast</h2>
+
+              <div className="containerIconsAndButtonBelow">
+                <button className='buttonSelectWeek' onClick={() => setWeekDays(!weekDays)}>
+                  {selectedDay}
+                  <FiChevronDown className='arrowDown' /></button>
+              </div>
+
+              {weekDays && (
+                <SelectDayWeek
+                  setSelectedDay={setSelectedDay}
+                  setWeekDays={setWeekDays}
+                />
+              )}
+            </div>
+
+            <div className="containerHours">
+
+              {data?.hourly.temperature_2m.slice(0, 24).map((temperature, index) => (
+                <div className="containerHoursGrade" key={index}>
+                  <div className="hours">
+                    <WeatherIcon code={data.hourly.weather_code[index]} />
+                    {hourlysDay[index]} PM
+                  </div>
+
+                  {temperature}°
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
+
       </div>
+
+
 
     </div>
 
