@@ -25,323 +25,322 @@ body {
   align-items: center;
   height: 100vh;
   width: 100%;
-  padding: 15px 230px 60px 230px;
   background: colors.$deepNavyBlue;
 
-  .headerContainer {
+
+  .centerContainer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100px;
-    width: 100%;
+    flex-direction: column;
 
-    img {
-      height: fit-content;
-    }
 
-    .dropdownMenu {
-      height: 30px;
-      width: 70px;
+    .headerContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      width: 100%;
 
-      .containerIconsAndButton {
-        display: flex;
+      img {
+        height: fit-content;
+      }
+
+      .dropdownMenu {
         height: 30px;
-        width: 100px;
-
-        .arrowDown {
-          color: colors.$white;
-        }
-
-        .menu {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: colors.$white;
-          height: 30px;
-          width: 90px;
-          border: 1px solid colors.$darkBluePurple;
-          border-radius: 5px;
-          background: colors.$darkBluePurple;
-          cursor: pointer;
-        }
-      }
-
-      .popupWindow {
-        position: absolute;
-        right: 210px;
-        width: 170px;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 10px;
-
-        background: colors.$darkBluePurple;
-
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-
-        button {
-          position: relative;
-          display: block;
-          width: 100%;
-          padding: 8px 6px;
-          margin: 0;
-
-          text-align: left;
-          font-size: 12px;
-          color: colors.$white;
-
-          border: none;
-          border-radius: 6px;
-          background: transparent;
-
-          cursor: pointer;
-
-          &:hover {
-            background: colors.$darkSlateBlue;
-          }
-
-          &.selected {
-            background: colors.$blueGrayDark;
-
-            &::after {
-              content: "✓";
-              position: absolute;
-              right: 8px;
-              color: colors.$white;
-            }
-          }
-        }
-
-        .separator {
-          height: 1px;
-          margin: 4px 0;
-          background-color: colors.$darkSlate;
-        }
-
-        p {
-          margin: 8px 6px 4px;
-          color: colors.$blueGray;
-          font-size: 12px;
-        }
-
-        hr {
-          border: none;
-          border-top: 1px solid colors.$gray;
-          margin: 10px 0;
-        }
-      }
-    }
-  }
-
-  .containerTittleAndSeeker {
-    margin: 10px 0px 20px 0px;
-    text-align: center;
-
-    h1 {
-      font-size: 44px;
-      color: colors.$white;
-    }
-
-    .search {
-      margin-bottom: 20px;
-
-      input {
-        height: 40px;
-        width: 430px;
-        padding: 10px;
-        margin-right: 16px;
-        border: 1px solid colors.$darkBluePurple;
-        border-radius: 10px;
-        color: colors.$white;
-        background: colors.$darkBluePurple;
-
-        &::placeholder {
-          color: colors.$white;
-        }
-      }
-
-      button {
-        height: 40px;
         width: 70px;
-        border: 1px solid colors.$indigoBlue;
-        border-radius: 10px;
-        color: colors.$white;
-        background: colors.$indigoBlue;
-        cursor: pointer;
-      }
-    }
-  }
 
-  .containerTheTime {
-    display: flex;
-    justify-content: space-between;
-    height: 600px;
-    width: 100%;
-    margin-top: 30px;
-    border-radius: 30px;
-    background: red;
-
-    .containerInfoTime {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      width: 65%;
-      border-radius: 30px;
-      background: blue;
-
-
-      .topContainer {
-        position: relative;
-        height: 230px;
-        border-radius: 16px;
-        padding: 30px;
-        overflow: hidden;
-
-        background: linear-gradient(135deg,
-            colors.$indigoBlue,
-            colors.$weatherPurple );
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-       
-
-        .backgroundShape {
-          position: absolute;
-
-          border-radius: 50%;
-        }
-
-        
-        .contianerIconTemperature {
+        .containerIconsAndButton {
           display: flex;
-          align-items: center;
-          gap: 20px;
-
-          .icon {
-            font-size: 30px;
-          }
-
-          .temperature {
-            font-size: 60px;
-            color: colors.$white;
-            font-weight: bold;
-          }
-        }
-      }
-
-      .midleContainer {
-        display: flex;
-        height: 30%;
-        width: 100%;
-        background: purple;
-      }
-
-      .lastContainer {
-        display: flex;
-        height: 30%;
-        width: 100%;
-        background: lawngreen;
-      }
-    }
-
-    .containerHourlyForecast {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      width: 30%;
-      padding: 20px;
-      border-radius: 30px;
-      background: colors.$DarkNav;
-
-      .containerTittleAndSelect {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 20px;
-        width: 100%;
-        padding: 10px;
-
-        h2 {
-          font-size: 15px;
-          color: colors.$white;
-        }
-
-        .buttonSelectWeek {
-          display: flex;
-          align-items: center;
-          height: 25px;
+          height: 30px;
           width: 100px;
-          justify-content: space-between;
-          border: 1px solid colors.$darkBluePurple;
-          border-radius: 5px;
-          color: colors.$white;
-          background: colors.$MutedIndigo;
-          cursor: pointer;
+
+          .arrowDown {
+            color: colors.$white;
+          }
+
+          .menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: colors.$white;
+            height: 30px;
+            width: 90px;
+            border: 1px solid colors.$darkBluePurple;
+            border-radius: 5px;
+            background: colors.$darkBluePurple;
+            cursor: pointer;
+          }
         }
 
-        .dropdownMenu {
-          position: absolute;
-          right: 250px;
-          top: 350px;
-          width: 180px;
+        .popupWindow {
+          position: relative;
+          right: 80px;
+          width: 170px;
           padding: 10px;
           margin-top: 10px;
-          border-radius: 8px;
-          border: 1px solid colors.$MutedIndigo;
-          background-color: colors.$darkBluePurple;
+          border-radius: 10px;
+
+          background: colors.$darkBluePurple;
+
           display: flex;
           flex-direction: column;
           align-items: stretch;
-          box-shadow: 0 4px 12px colors.$black;
-          overflow: hidden;
 
           button {
-            display: flex;
-            justify-content: left;
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 8px 6px;
+            margin: 0;
+
+            text-align: left;
+            font-size: 12px;
             color: colors.$white;
-            padding: 8px;
+
             border: none;
-            background: colors.$darkBluePurple;
+            border-radius: 6px;
+            background: transparent;
+
             cursor: pointer;
 
             &:hover {
               background: colors.$darkSlateBlue;
-              border-radius: 5px;
+            }
+
+            &.selected {
+              background: colors.$blueGrayDark;
+
+              &::after {
+                content: "✓";
+                position: absolute;
+                right: 8px;
+                color: colors.$white;
+              }
+            }
+          }
+
+          .separator {
+            height: 1px;
+            margin: 4px 0;
+            background-color: colors.$darkSlate;
+          }
+
+          p {
+            margin: 8px 6px 4px;
+            color: colors.$blueGray;
+            font-size: 12px;
+          }
+
+          hr {
+            border: none;
+            border-top: 1px solid colors.$gray;
+            margin: 10px 0;
+          }
+        }
+      }
+    }
+
+    .containerTittleAndSeeker {
+      margin: 10px 0px 20px 0px;
+      text-align: center;
+
+      h1 {
+        font-size: 44px;
+        color: colors.$white;
+      }
+
+      .search {
+        margin-bottom: 20px;
+
+        input {
+          height: 40px;
+          width: 430px;
+          padding: 10px;
+          margin-right: 16px;
+          border: 1px solid colors.$darkBluePurple;
+          border-radius: 10px;
+          color: colors.$white;
+          background: colors.$darkBluePurple;
+
+          &::placeholder {
+            color: colors.$white;
+          }
+        }
+
+        button {
+          height: 40px;
+          width: 70px;
+          border: 1px solid colors.$indigoBlue;
+          border-radius: 10px;
+          color: colors.$white;
+          background: colors.$indigoBlue;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .containerTheTime {
+      display: flex;
+      justify-content: space-between;
+      height: 580px;
+      width: 1000px;
+      margin-top: 30px;
+      border-radius: 30px;
+      background: red;
+
+      .containerInfoTime {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 65%;
+        border-radius: 30px;
+
+
+        .topContainer {
+          position: relative;
+          height: 230px;
+          border-radius: 16px;
+          padding: 30px;
+          overflow: hidden;
+
+          background: linear-gradient(135deg,
+              colors.$indigoBlue,
+              colors.$weatherPurple );
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+
+
+          .backgroundShape {
+            position: absolute;
+
+            border-radius: 50%;
+          }
+
+
+          .contianerIconTemperature {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            .icon {
+              font-size: 30px;
+            }
+
+            .temperature {
+              font-size: 60px;
+              color: colors.$white;
+              font-weight: bold;
             }
           }
         }
 
-
+        .lastContainer {
+          display: flex;
+          height: 30%;
+          width: 100%;
+          background: lawngreen;
+        }
       }
 
-      .containerHours {
+      .containerHourlyForecast {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        gap: 12px;
-        height: 500px;
-        width: 100%;
-        margin-top: 16px;
-        padding: 10px 16px 0px 0px;
-        overflow-y: auto;
+        height: 100%;
+        width: 30%;
+        padding: 20px;
+        border-radius: 30px;
+        background: colors.$DarkNav;
 
-        .containerHoursGrade {
+        .containerTittleAndSelect {
           display: flex;
-          align-items: center;
           justify-content: space-between;
-          height: 50px;
-          width: auto;
-          padding: 14px;
-          flex-shrink: 0;
-          color: colors.$white;
-          background: colors.$cardBackground;
+          align-items: center;
+          height: 20px;
+          gap: 25px;
+          width: max-content;
+          padding: 10px;
+
+          h2 {
+            font-size: 15px;
+            color: colors.$white;
+          }
+
+          .buttonSelectWeek {
+            display: flex;
+            align-items: center;
+            height: 25px;
+            width: 100px;
+            justify-content: space-between;
+            border: 1px solid colors.$darkBluePurple;
+            border-radius: 5px;
+            color: colors.$white;
+            background: colors.$MutedIndigo;
+            cursor: pointer;
+          }
+
+          .dropdownMenu {
+            position: relative;
+            right: 200px;
+            top: 140px;
+            width: 180px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid colors.$MutedIndigo;
+            background-color: colors.$darkBluePurple;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            box-shadow: 0 4px 12px colors.$black;
+            overflow: hidden;
+
+            button {
+              display: flex;
+              justify-content: left;
+              color: colors.$white;
+              padding: 8px;
+              border: none;
+              background: colors.$darkBluePurple;
+              cursor: pointer;
+
+              &:hover {
+                background: colors.$darkSlateBlue;
+                border-radius: 5px;
+              }
+            }
+          }
+
+
         }
 
-        span {
-          margin-right: 4px;
+        .containerHours {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 12px;
+          height: 500px;
+          width: 100%;
+          margin-top: 16px;
+          padding: 10px 16px 0px 0px;
+          overflow-y: auto;
+
+          .containerHoursGrade {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 50px;
+            width: auto;
+            padding: 14px;
+            flex-shrink: 0;
+            color: colors.$white;
+            background: colors.$cardBackground;
+          }
+
+          span {
+            margin-right: 4px;
+          }
         }
       }
     }

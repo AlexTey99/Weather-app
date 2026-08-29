@@ -2,10 +2,11 @@
 
 .firstPoint {
   position: absolute;
-  top: 50px;
-  left: 68px;
+  top: 40px;
+  left: 60px;
   height: 10px;
   width: 10px;
+  opacity: 0.2;
   border-radius: 50%;
   background: colors.$whiteLow;
   box-shadow: 0 0 6px 2px colors.$whiteLow;
@@ -14,9 +15,9 @@
 .secondPoint {
   position: absolute;
   top: 30px;
-  left: 450px;
-  height: 10px;
-  width: 10px;
+  left: 320px;
+  height: 8px;
+  width: 8px;
   border-radius: 50%;
   background: colors.$weatherOrange;
   box-shadow: 0 0 6px colors.$weatherOrange;
@@ -25,7 +26,7 @@
 .thirdPoint {
   position: absolute;
   bottom: 50px;
-  left: 330px;
+  left: 280px;
   height: 10px;
   width: 10px;
   border-radius: 50%;
@@ -36,9 +37,10 @@
 .fourthPoint {
   position: absolute;
   bottom: 20px;
-  right: 170px;
+  right: 186px;
   height: 10px;
   width: 10px;
+  opacity: 0.2;
   border-radius: 50%;
   background: colors.$whiteLow;
   box-shadow: 0 0 6px 2px colors.$whiteLow;
