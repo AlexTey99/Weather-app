@@ -1,18 +1,31 @@
 import './WeatherStats.scss';
+import { useState, useEffect } from 'react';
 
 interface StatItem {
     title: string;
     value: string;
 }
 
-
 function WeatherStats() {
+    const [weatherData, setWeatherData] = useState<any>(null);
 
-    const stats = [
-        { title: 'Feels Like', value: '64°' },
-        { title: 'Humidity', value: '46%' },
-        { title: 'Wind', value: '9 mph' },
-        { title: 'Precipitation', value: '0 in' }
+  
+    useEffect(() => {
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
+
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                setWeatherData(data); 
+            })
+            .catch((error) => console.error('Error cargando la API:', error));
+    }, []);
+
+    const stats: StatItem[] = [
+        { title: 'Feels Like', value: weatherData?.current?.apparent_temperature !== undefined ? `${weatherData.current.apparent_temperature}°` : '--' },
+        { title: 'Humidity', value: weatherData?.hourly?.relative_humidity_2m?.[0] !== undefined ? `${weatherData.hourly.relative_humidity_2m[0]}%` : '--' },
+        { title: 'Wind', value: weatherData?.current?.wind_speed_10m !== undefined ? `${weatherData.current.wind_speed_10m} km/h` : '--' },
+        { title: 'Precipitation', value: weatherData?.current?.precipitation !== undefined ? `${weatherData.current.precipitation} mm` : '--' }
     ];
 
     return (
@@ -21,17 +34,15 @@ function WeatherStats() {
                 stats.map((stat: StatItem) => (
                     <div key={stat.title} className='receivingData'>
                         <span>{stat.title}</span>
-                        <span>{stat.value}</span>                 
+                        <span>{stat.value}</span>
                     </div>
                 ))
             }
         </div>
-
-
-
-    )
+    );
 }
 
-export default WeatherStats
+export default WeatherStats;
+
 
 
