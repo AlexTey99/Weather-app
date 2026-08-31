@@ -11,6 +11,7 @@ import WeatherIcon from './components/GetWeatherIcon/GetWeatherIcon';
 import CurrentWeatherIcons from './components/CurrentWeatherIcons/CurrentWeatherIcons';
 import CloudIcons from './components/CurrentWeatherIcons/CloudIcons';
 import WeatherStats from './components/WeatherStats/WeatherStats';
+import DailyForecast from './components/DailyForecast/DailyForecast';
 
 function App() {
   const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
@@ -101,7 +102,9 @@ function App() {
 
             <WeatherStats />
 
-            <div className="lastContainer"></div>
+            <h2 className='dailyForecast'>Daily Forecast</h2>
+            <DailyForecast />
+
           </div>
           <div className="containerHourlyForecast">
             <div className="containerTittleAndSelect">
