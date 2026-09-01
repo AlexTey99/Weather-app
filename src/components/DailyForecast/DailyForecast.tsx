@@ -1,38 +1,51 @@
-import './DailyForecast.scss'
-interface TypeArray {
-    day: string;
-    icon: string;
-    left: string;
-    right: string;
+import './DailyForecast.scss';
+import { getSchemaWeather } from '../IconsForecast/IconsForecast'; 
+
+// 1. Definimos que este componente recibe 'data' desde el padre
+interface DailyForecastProps {
+    data: any; // Puedes cambiar 'any' por tu tipo 'WeatherData' si lo tienes importado
 }
 
-function DailyForecast() {
+function DailyForecast({ data }: DailyForecastProps) {
 
-    const forecast: TypeArray[] = [
-        { day: 'Tue', icon: 'icon', left: 'left', right: 'right' },
-        { day: 'Wed', icon: 'icon', left: 'left', right: 'right' },
-        { day: 'Thu', icon: 'icon', left: 'left', right: 'right' },
-        { day: 'Fri', icon: 'icon', left: 'left', right: 'right' },
-        { day: 'Sat', icon: 'icon', left: 'left', right: 'right' },
-        { day: 'Sun', icon: 'icon', left: 'left', right: 'right' },
-        { day: 'Mon', icon: 'icon', left: 'left', right: 'right' },
-    ]
+    // 2. La validación ahora solo vigila la prop entrante
+    if (!data || !data.daily || !data.daily.time) {
+        return <div className='lastContainer' style={{ color: '#fff' }}>Cargando pronóstico...</div>;
+    }
+
+    const formatDayName = (dateString: string) => {
+        const date = new Date(`${dateString}T00:00:00`);
+        return date.toLocaleDateString('en-US', { weekday: 'short' });
+    };
 
     return (
         <div className='lastContainer'>
-            {forecast.map((item: TypeArray) => (
-                <div key={item.day} className="containerForecast">
-                    <span className='daysWeek'>{item.day}</span>
-                    <span>{item.icon}</span>
-                    <div className="gradue">
-                        <span>{item.left}</span>
-                        <span>{item.right}</span>
-                    </div>
+            {data.daily.time.map((timeString: string, index: number) => {
+                const dayName = formatDayName(timeString);
+                const currentCode = data.daily.weather_code?.[index];
+                const { icon, text } = getSchemaWeather(currentCode);
 
-                </div>
-            ))}
+                const maxTemp = data.daily.temperature_2m_max?.[index] !== undefined 
+                    ? `${Math.round(data.daily.temperature_2m_max[index])}°` 
+                    : '--';
+                const minTemp = data.daily.temperature_2m_min?.[index] !== undefined 
+                    ? `${Math.round(data.daily.temperature_2m_min[index])}°` 
+                    : '--';
+
+                return (
+                    <div key={timeString} className="containerForecast">
+                        <span className='daysWeek'>{dayName}</span>
+                        <span className='weatherVisual' title={text}>{icon}</span>
+                        <div className="gradue">
+                            <span className='maxTemp'>{maxTemp}</span>
+                            <span className='minTemp'>{minTemp}</span>
+                        </div>
+                    </div>
+                );
+            })}
         </div>
-    )
+    );
 }
 
-export default DailyForecast
+export default DailyForecast;
+

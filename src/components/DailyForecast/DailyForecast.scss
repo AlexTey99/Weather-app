@@ -18,7 +18,15 @@
         border-radius: 10px;
         background: colors.$darkBluePurple;
 
-        .daysWeek{
+        .daysWeek {
+            color: colors.$white;
+        }
+
+        .gradue {
+            display: flex;
+            justify-content: space-between;
+            width: stretch;
+            padding: 6px;
             color: colors.$white;
         }
     }

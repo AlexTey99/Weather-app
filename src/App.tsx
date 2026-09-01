@@ -14,7 +14,7 @@ import WeatherStats from './components/WeatherStats/WeatherStats';
 import DailyForecast from './components/DailyForecast/DailyForecast';
 
 function App() {
-  const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code";
+  const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code";
 
   const [open, setOpen] = useState(false);
   const [weekDays, setWeekDays] = useState(false);
@@ -103,7 +103,7 @@ function App() {
             <WeatherStats />
 
             <h2 className='dailyForecast'>Daily Forecast</h2>
-            <DailyForecast />
+            <DailyForecast data={data} />
 
           </div>
           <div className="containerHourlyForecast">
