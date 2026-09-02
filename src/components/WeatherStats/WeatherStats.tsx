@@ -25,7 +25,7 @@ function WeatherStats({ weatherData }: WeatherStatsProps) {
                 stats.map((stat: StatItem) => (
                     <div key={stat.title} className='receivingData'>
                         <span>{stat.title}</span>
-                        <span>{stat.value}</span>
+                        <span style={{ fontSize: '22px' }}>{stat.value}</span>
                     </div>
                 ))
             }
