@@ -1,4 +1,4 @@
-
+import './SelectAdjust.scss';
 function SelectAdjust() {
 
     return (
