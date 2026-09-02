@@ -1,24 +1,16 @@
 import './WeatherStats.scss';
-import { useState, useEffect } from 'react';
 
 interface StatItem {
     title: string;
     value: string;
 }
+interface WeatherStatsProps {
+    weatherData: any;
+}
 
-function WeatherStats() {
-    const [weatherData, setWeatherData] = useState<any>(null);
 
-    useEffect(() => {
-        const url = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code";
-
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                setWeatherData(data); 
-            })
-            .catch((error) => console.error('Error cargando la API:', error));
-    }, []);
+function WeatherStats({ weatherData }: WeatherStatsProps) {
+    // const url = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code";
 
     const stats: StatItem[] = [
         { title: 'Feels Like', value: weatherData?.current?.apparent_temperature !== undefined ? `${weatherData.current.apparent_temperature}°` : '--' },
