@@ -83,7 +83,9 @@ body {
       }
 
       .search {
+        position: relative;
         margin-bottom: 20px;
+        z-index: 1;
 
         input {
           height: 40px;
@@ -98,6 +100,18 @@ body {
           &::placeholder {
             color: colors.$white;
           }
+        }
+
+        .suggestionsBox {
+          position: absolute;
+          top: 50px;
+          left: 240px;
+          height: 200px;
+          width: 430px;
+          z-index: 1;
+          border-radius: 10px;
+          padding: 10px;
+          background: colors.$darkBluePurple;
         }
 
         button {
@@ -169,7 +183,7 @@ body {
           }
         }
 
-        .dailyForecast{
+        .dailyForecast {
           font-size: 16px;
           color: colors.$white;
         }

@@ -64,7 +64,10 @@ function App() {
             <button type="submit">
               Search
             </button>
+
+            <div className="suggestionsBox"></div>
           </form>
+
         </div>
 
         <div className="containerTheTime">
