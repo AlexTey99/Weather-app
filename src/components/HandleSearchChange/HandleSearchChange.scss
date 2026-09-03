@@ -1,0 +1,72 @@
+@use '/src/styles/colors.scss';
+
+.containerTittleAndSeeker {
+    margin: 10px 0px 20px 0px;
+    text-align: center;
+
+    h1 {
+        font-size: 44px;
+        color: colors.$white;
+    }
+
+    .search {
+        position: relative;
+        margin-bottom: 20px;
+        z-index: 1;
+
+        input {
+            height: 40px;
+            width: 430px;
+            padding: 10px;
+            margin-right: 16px;
+            border: 1px solid colors.$darkBluePurple;
+            border-radius: 10px;
+            color: colors.$white;
+            background: colors.$darkBluePurple;
+
+            &::placeholder {
+                color: colors.$white;
+            }
+        }
+
+        .suggestionsBox {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            top: 50px;
+            left: 240px;
+            height: auto;
+            width: 430px;
+            z-index: 1;
+            border-radius: 10px;
+            padding: 10px;
+            color: colors.$white;
+            background: colors.$darkBluePurple;
+
+
+            .suggestionItem {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                height: 25px;
+                font-size: 14px;
+                cursor: pointer;
+
+                &:hover {
+                    background: colors.$darkSlateBlue;
+                }
+            }
+        }
+
+        button {
+            height: 40px;
+            width: 70px;
+            border: 1px solid colors.$indigoBlue;
+            border-radius: 10px;
+            color: colors.$white;
+            background: colors.$indigoBlue;
+            cursor: pointer;
+        }
+    }
+}

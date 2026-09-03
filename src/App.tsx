@@ -12,6 +12,7 @@ import CurrentWeatherIcons from './components/CurrentWeatherIcons/CurrentWeather
 import CloudIcons from './components/CurrentWeatherIcons/CloudIcons';
 import WeatherStats from './components/WeatherStats/WeatherStats';
 import DailyForecast from './components/DailyForecast/DailyForecast';
+import HandleSearchChange from './components/HandleSearchChange/HandleSearchChange';
 
 function App() {
   const APIURL = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code";
@@ -49,26 +50,7 @@ function App() {
         </div>
 
 
-        <div className="containerTittleAndSeeker">
-          <h1>How's the sky looking today?</h1>
-
-          <form className="search">
-
-            <input
-              type="search"
-              id="search-input"
-              name="q"
-              placeholder="Search for a place..."
-            />
-
-            <button type="submit">
-              Search
-            </button>
-
-            <div className="suggestionsBox"></div>
-          </form>
-
-        </div>
+        <HandleSearchChange />
 
         <div className="containerTheTime">
           <div className="containerInfoTime">
