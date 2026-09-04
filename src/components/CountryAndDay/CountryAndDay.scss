@@ -1,0 +1,10 @@
+@use '/src/styles/colors.scss';
+
+.countryAndDay {
+    color: colors.$white;
+
+    p {
+        font-size: 12px;
+        color: colors.$blueGray;
+    }
+}

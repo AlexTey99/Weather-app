@@ -13,6 +13,7 @@ import CloudIcons from './components/CurrentWeatherIcons/CloudIcons';
 import WeatherStats from './components/WeatherStats/WeatherStats';
 import DailyForecast from './components/DailyForecast/DailyForecast';
 import HandleSearchChange from './components/HandleSearchChange/HandleSearchChange';
+import CountryAndDay from './components/CountryAndDay/CountryAndDay';
 
 function App() {
   const [latitud, setLatitud] = useState<number>(52.52);
@@ -20,6 +21,7 @@ function App() {
   
   const APIURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code`;
 
+  const [selectedCountry, setSelectedCountry] = useState<string>('Berlin, Germany');
   const [open, setOpen] = useState(false);
   const [weekDays, setWeekDays] = useState(false);
   const [selectedDay, setSelectedDay] = useState('Select day');
@@ -52,25 +54,13 @@ function App() {
 
         </div>
 
-
-        {/* 🌟 PASO FINAL: Le entregamos las llaves de la memoria al buscador */}
-        <HandleSearchChange setLatitude={setLatitud} setLongitude={setLongitud}/>
+        <HandleSearchChange setLatitude={setLatitud} setLongitude={setLongitud} setCountryName={setSelectedCountry} />
 
         <div className="containerTheTime">
           <div className="containerInfoTime">
             <div className="topContainer">
 
-              <div className="countryAndDay">
-                <h2>Berlin, Germany</h2>
-                <p>
-                  {new Date(data?.current.time ?? new Date()).toLocaleDateString("en-US", {
-                    weekday: "long",
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric"
-                  })}
-                </p>
-              </div>
+              <CountryAndDay data={data} countryName={selectedCountry}/>
 
               <CurrentWeatherIcons />
               <CloudIcons />

@@ -6,12 +6,12 @@ import type { Countries } from '../Countrys/Countrys'
 interface HandleSearchChangeProps {
     setLatitude: (lat: number) => void;
     setLongitude: (lon: number) => void;
+    setCountryName: (name: string) => void;
 }
 
-function HandleSearchChange({ setLatitude, setLongitude }: HandleSearchChangeProps) {
+function HandleSearchChange({ setLatitude, setLongitude, setCountryName }: HandleSearchChangeProps) {
     const [search, setSearch] = useState('');
     const [suggestions, setSuggestions] = useState<Countries[]>([]);
-    console.log('Suggestions:', search);
 
     const cleanText = (text: string) => {
         return text
@@ -81,7 +81,9 @@ function HandleSearchChange({ setLatitude, setLongitude }: HandleSearchChangePro
                                 onClick={() => {                                    
                                     setSearch(country.name);
                                     setLatitude(country.latitude);
-                                    setLongitude(country.longitude);                                  
+                                    setLongitude(country.longitude);   
+                                    setCountryName(country.name);
+                             
                                     setSuggestions([]);
                                 }}
                             >
