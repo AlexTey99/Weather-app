@@ -1,50 +1,70 @@
 import './HandleSearchChange.scss'
 import { useState } from 'react'
-// Importamos también el tipo 'Countries' para que TypeScript esté contento
 import { CountriesWorld } from '../Countrys/Countrys'
 import type { Countries } from '../Countrys/Countrys'
 
 interface HandleSearchChangeProps {
-    setLatitud: (lat: number) => void;
-    setLongitud: (lon: number) => void;
+    setLatitude: (lat: number) => void;
+    setLongitude: (lon: number) => void;
 }
 
-// Recibimos las funciones de App.tsx mediante Props para poder cambiar el clima
-function HandleSearchChange({ setLatitud, setLongitud }: HandleSearchChangeProps) {
-    const [busqueda, setBusqueda] = useState('');
-    // Tipamos el estado con tu interfaz Countries[]
-    const [sugerencias, setSugerencias] = useState<Countries[]>([]);
+function HandleSearchChange({ setLatitude, setLongitude }: HandleSearchChangeProps) {
+    const [search, setSearch] = useState('');
+    const [suggestions, setSuggestions] = useState<Countries[]>([]);
+    console.log('Suggestions:', search);
 
-    // 🌟 ENVOLVEMOS EL CÓDIGO SUELTO: Creamos la función que el onChange necesita
-    const manejarCambio = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const valor = e.target.value;
-        setBusqueda(valor);
+    const cleanText = (text: string) => {
+        return text
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase();
+    };
 
-        if (valor.trim() === '') {
-            setSugerencias([]);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearch(value);
+
+        if (value.trim() === '') {
+            setSuggestions([]);
             return;
         }
 
-        // Buscamos dentro de los 20 países locales
-        const filtrados = CountriesWorld.filter(country =>
-            country.name.toLowerCase().startsWith(valor.toLowerCase())
-        );
+        const cleanedValue = cleanText(value);
 
-        setSugerencias(filtrados);
+        const filtered = CountriesWorld.filter(country => {
+            const cleanedCountryName = cleanText(country.name);
+            return cleanedCountryName.startsWith(cleanedValue);
+        });
+
+        setSuggestions(filtered);
     };
 
     return (
         <div className="containerTittleAndSeeker">
             <h1>How's the sky looking today?</h1>
 
-            <form className="search" onSubmit={(e) => e.preventDefault()}>
+            <form 
+                className="search" 
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    
+                    if (suggestions.length > 0) {
+                        const firstCountry = suggestions[0];
+                        
+                        setSearch(firstCountry.name);
+                        setLatitude(firstCountry.latitude);
+                        setLongitude(firstCountry.longitude);
+                        setSuggestions([]);
+                    }
+                }}
+            >
                 <input
                     type="text"
                     id="search-input"
                     name="q"
-                    value={busqueda}
+                    value={search}
                     placeholder="Search for a place..."
-                    onChange={manejarCambio} // Ahora sí coincide con la función de arriba
+                    onChange={handleChange}
                     autoComplete="off"
                 />
 
@@ -52,26 +72,20 @@ function HandleSearchChange({ setLatitud, setLongitud }: HandleSearchChangeProps
                     Search
                 </button>
 
-                {sugerencias.length > 0 && (
+                {suggestions.length > 0 && (
                     <div className="suggestionsBox">
-                        {sugerencias.map((pais) => (
+                        {suggestions.map((country) => (
                             <div
-                                key={pais.id}
+                                key={country.id}
                                 className="suggestionItem"
-                                onClick={() => {
-                                    // 1. Escribimos el nombre en el cuadro de búsqueda
-                                    setBusqueda(pais.name);
-
-                                    // 2. 🌟 ¡EL TRUCO FINAL! Cambiamos las coordenadas en App.tsx
-                                    setLatitud(pais.latitude);
-                                    setLongitud(pais.longitude);
-
-                                    // 3. Cerramos el desplegable
-                                    setSugerencias([]);
+                                onClick={() => {                                    
+                                    setSearch(country.name);
+                                    setLatitude(country.latitude);
+                                    setLongitude(country.longitude);                                  
+                                    setSuggestions([]);
                                 }}
                             >
-                                {/* Opcional: Puedes poner {pais.flag} al lado si quieres ver las letras de los países que guardaste */}
-                                {pais.name}
+                                {country.name}
                             </div>
                         ))}
                     </div>
@@ -82,4 +96,6 @@ function HandleSearchChange({ setLatitud, setLongitud }: HandleSearchChangeProps
 }
 
 export default HandleSearchChange;
+
+
 
