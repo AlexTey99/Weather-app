@@ -15,10 +15,11 @@ import DailyForecast from './components/DailyForecast/DailyForecast';
 import HandleSearchChange from './components/HandleSearchChange/HandleSearchChange';
 
 function App() {
-    const [latitud, setLatitud] = useState<number>(52.52);
-    const [longitud, setLongitud] = useState<number>(13.41);
-  const APIURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code`;
+  const [latitud, setLatitud] = useState<number>(52.52);
+  const [longitud, setLongitud] = useState<number>(13.41);
   
+  const APIURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code`;
+
   const [open, setOpen] = useState(false);
   const [weekDays, setWeekDays] = useState(false);
   const [selectedDay, setSelectedDay] = useState('Select day');
@@ -52,8 +53,8 @@ function App() {
         </div>
 
 
-         {/* 🌟 PASO FINAL: Le entregamos las llaves de la memoria al buscador */}
-        <HandleSearchChange setLatitud={setLatitud} setLongitud={setLongitud} />
+        {/* 🌟 PASO FINAL: Le entregamos las llaves de la memoria al buscador */}
+        <HandleSearchChange setLatitude={setLatitud} setLongitude={setLongitud}/>
 
         <div className="containerTheTime">
           <div className="containerInfoTime">
