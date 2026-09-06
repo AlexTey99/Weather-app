@@ -18,7 +18,7 @@ import CountryAndDay from './components/CountryAndDay/CountryAndDay';
 function App() {
   const [latitud, setLatitud] = useState<number>(52.52);
   const [longitud, setLongitud] = useState<number>(13.41);
-  
+
   const APIURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code`;
 
   const [selectedCountry, setSelectedCountry] = useState<string>('Berlin, Germany');
@@ -26,11 +26,18 @@ function App() {
   const [weekDays, setWeekDays] = useState(false);
   const [selectedDay, setSelectedDay] = useState('Select day');
   const { data } = useFetchWeather(APIURL)
-  const hourlysDay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 
   const switchSelect = (param: boolean) => {
     setOpen(!param)
   }
+
+  const diaSeleccionadoIndex = data?.daily?.time ? data.daily.time.findIndex((fechaTexto) => {
+    const nombreDia = new Date(fechaTexto).toLocaleDateString('en-US', { weekday: 'long' });
+    return nombreDia === selectedDay;
+  }) : 0;
+
+  const indiceFinal = diaSeleccionadoIndex >= 0 ? diaSeleccionadoIndex : 0;
+
 
   return (
     <div className="mainContainer">
@@ -60,7 +67,7 @@ function App() {
           <div className="containerInfoTime">
             <div className="topContainer">
 
-              <CountryAndDay data={data} countryName={selectedCountry}/>
+              <CountryAndDay data={data} countryName={selectedCountry} dayIndex={indiceFinal} />
 
               <CurrentWeatherIcons />
               <CloudIcons />
@@ -72,20 +79,25 @@ function App() {
                 </div>
 
                 <div className="temperature">
-                  {data?.current.temperature_2m}°
+                  {indiceFinal === 0
+                    ? `${data?.current.temperature_2m}°`
+                    : `${data?.daily.temperature_2m_max[indiceFinal]}°`
+                  }
                 </div>
+
 
               </div>
 
             </div>
 
-            <WeatherStats weatherData={data} />
+            <WeatherStats weatherData={data} dayIndex={indiceFinal} />
 
             <h2 className='dailyForecast'>Daily Forecast</h2>
             <DailyForecast data={data} />
 
           </div>
           <div className="containerHourlyForecast">
+
             <div className="containerTittleAndSelect">
               <h2>Hourly forecast</h2>
 
@@ -104,19 +116,21 @@ function App() {
             </div>
 
             <div className="containerHours">
+              {data?.hourly.temperature_2m
+                .slice(indiceFinal * 24, (indiceFinal + 1) * 24)
+                .map((temperature, index) => {
+                  const horaActual = index;
+                  const ampm = horaActual >= 12 ? 'PM' : 'AM';
+                  const horaFormateada = `${horaActual % 12 || 12} ${ampm}`;
 
-              {data?.hourly.temperature_2m.slice(0, 24).map((temperature, index) => (
-                <div className="containerHoursGrade" key={index}>
-                  <div className="hours">
-                    <WeatherIcon code={data.hourly.weather_code[index]} />
-                    {hourlysDay[index]} PM
-                  </div>
-
-                  {temperature}°
-                </div>
-              ))}
+                  return (
+                    <div key={index} className="containerHoursGrade">
+                      <span>{horaFormateada}</span>
+                      <span>{Math.round(temperature)}°</span>
+                    </div>
+                  );
+                })}
             </div>
-
           </div>
         </div>
 
