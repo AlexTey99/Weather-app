@@ -8,17 +8,40 @@ interface StatItem {
 interface WeatherStatsProps {
     weatherData: any;
     dayIndex?: number;
+    // 1. Añadimos las tres props de las unidades en la interfaz
+    tempUnit: string;
+    windUnit: string;
+    precipUnit: string;
 }
 
-function WeatherStats({ weatherData, dayIndex = 0 }: WeatherStatsProps) {
+// 2. Recibimos las tres nuevas props en la función
+function WeatherStats({ weatherData, dayIndex = 0, tempUnit, windUnit, precipUnit }: WeatherStatsProps) {
     const isToday = dayIndex === 0;
+
+    // Guardamos los valores base de forma segura para aplicar las fórmulas
+    const currentFeelsLike = weatherData?.current?.apparent_temperature;
+    const dailyFeelsLike = weatherData?.daily?.apparent_temperature_max?.[dayIndex];
+
+    const currentWind = weatherData?.current?.wind_speed_10m;
+    const dailyWind = weatherData?.daily?.wind_speed_10m_max?.[dayIndex]; // Usamos max por seguridad para el daily
+
+    const currentPrecip = weatherData?.current?.precipitation;
+    const dailyPrecip = weatherData?.daily?.precipitation_sum?.[dayIndex];
 
     const stats: StatItem[] = [
         {
             title: 'Feels Like',
             value: isToday
-                ? (weatherData?.current?.apparent_temperature !== undefined ? `${Math.round(weatherData.current.apparent_temperature)}°` : '--')
-                : (weatherData?.daily?.apparent_temperature_max?.[dayIndex] !== undefined ? `${Math.round(weatherData.daily.apparent_temperature_max[dayIndex])}°` : '--')
+                ? (currentFeelsLike !== undefined && currentFeelsLike !== null
+                    ? (tempUnit === 'celsius'
+                        ? `${Math.round(currentFeelsLike)}°C`
+                        : `${Math.round((currentFeelsLike * 9) / 5 + 32)}°F`)
+                    : '--')
+                : (dailyFeelsLike !== undefined && dailyFeelsLike !== null
+                    ? (tempUnit === 'celsius'
+                        ? `${Math.round(dailyFeelsLike)}°C`
+                        : `${Math.round((dailyFeelsLike * 9) / 5 + 32)}°F`)
+                    : '--')
         },
         {
             title: 'Humidity',
@@ -29,15 +52,30 @@ function WeatherStats({ weatherData, dayIndex = 0 }: WeatherStatsProps) {
         {
             title: 'Wind',
             value: isToday
-                ? (weatherData?.current?.wind_speed_10m !== undefined ? `${weatherData.current.wind_speed_10m} km/h` : '--')
-                : (weatherData?.daily?.wind_speed_10m?.[dayIndex] !== undefined ? `${weatherData.daily.wind_speed_10m[dayIndex]} km/h` : '--')
-        }
-        ,
+                ? (currentWind !== undefined && currentWind !== null
+                    ? (windUnit === 'kmh'
+                        ? `${currentWind} km/h`
+                        : `${(currentWind * 0.621371).toFixed(1)} mph`)
+                    : '--')
+                : (dailyWind !== undefined && dailyWind !== null
+                    ? (windUnit === 'kmh'
+                        ? `${dailyWind} km/h`
+                        : `${(dailyWind * 0.621371).toFixed(1)} mph`)
+                    : '--')
+        },
         {
             title: 'Precipitation',
             value: isToday
-                ? (weatherData?.current?.precipitation !== undefined ? `${weatherData.current.precipitation} mm` : '--')
-                : (weatherData?.daily?.precipitation_sum?.[dayIndex] !== undefined ? `${weatherData.daily.precipitation_sum[dayIndex]} mm` : '--')
+                ? (currentPrecip !== undefined && currentPrecip !== null
+                    ? (precipUnit === 'mm'
+                        ? `${currentPrecip} mm`
+                        : `${(currentPrecip * 0.0393701).toFixed(2)} in`)
+                    : '--')
+                : (dailyPrecip !== undefined && dailyPrecip !== null
+                    ? (precipUnit === 'mm'
+                        ? `${dailyPrecip} mm`
+                        : `${(dailyPrecip * 0.0393701).toFixed(2)} in`)
+                    : '--')
         }
     ];
 
@@ -56,6 +94,7 @@ function WeatherStats({ weatherData, dayIndex = 0 }: WeatherStatsProps) {
 }
 
 export default WeatherStats;
+
 
 
 

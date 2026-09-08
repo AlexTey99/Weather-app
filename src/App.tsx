@@ -1,6 +1,6 @@
 
 import './App.scss'
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { FiChevronDown } from "react-icons/fi";
 import SelectAdjust from './components/SelectAdjust/SelectAdjust'
 import SelectDayWeek from '../src/components/Select/Select'
@@ -19,17 +19,24 @@ function App() {
   const [latitud, setLatitud] = useState<number>(52.52);
   const [longitud, setLongitud] = useState<number>(13.41);
 
-  const APIURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code`;
-
   const [selectedCountry, setSelectedCountry] = useState<string>('Berlin, Germany');
   const [open, setOpen] = useState(false);
   const [weekDays, setWeekDays] = useState(false);
   const [selectedDay, setSelectedDay] = useState('Select day');
-  const { data } = useFetchWeather(APIURL)
+
+
+  const [tempUnit, setTempUnit] = useState('celsius');
+  const [windUnit, setWindUnit] = useState('kmh');
+  const [precipUnit, setPrecipUnit] = useState('mm');
+  console.log(tempUnit, windUnit, precipUnit)
+
+  const APIURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code`;
+
+  const { data } = useFetchWeather(APIURL);
 
   const switchSelect = (param: boolean) => {
-    setOpen(!param)
-  }
+    setOpen(!param);
+  };
 
   const diaSeleccionadoIndex = data?.daily?.time ? data.daily.time.findIndex((fechaTexto) => {
     const nombreDia = new Date(fechaTexto).toLocaleDateString('en-US', { weekday: 'long' });
@@ -55,7 +62,14 @@ function App() {
             </div>
 
             {open && (
-              <SelectAdjust />
+              <SelectAdjust
+                tempUnit={tempUnit}
+                setTempUnit={setTempUnit}
+                windUnit={windUnit}
+                setWindUnit={setWindUnit}
+                precipUnit={precipUnit}
+                setPrecipUnit={setPrecipUnit}
+              />
             )}
           </div>
 
@@ -90,7 +104,14 @@ function App() {
 
             </div>
 
-            <WeatherStats weatherData={data} dayIndex={indiceFinal} />
+            <WeatherStats
+              weatherData={data}
+              dayIndex={indiceFinal}
+              tempUnit={tempUnit}
+              windUnit={windUnit}
+              precipUnit={precipUnit}
+            />
+
 
             <h2 className='dailyForecast'>Daily Forecast</h2>
             <DailyForecast data={data} />
