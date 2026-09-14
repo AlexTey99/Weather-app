@@ -45,6 +45,7 @@ function SelectAdjust({
       <button 
         className={windUnit === 'kmh' ? 'selected' : ''} 
         onClick={() => setWindUnit('kmh')}
+        style={{height: '34px'}}
       >
         km/h
       </button>

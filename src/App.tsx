@@ -1,6 +1,6 @@
 
 import './App.scss'
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { FiChevronDown } from "react-icons/fi";
 import SelectAdjust from './components/SelectAdjust/SelectAdjust'
 import SelectDayWeek from '../src/components/Select/Select'
