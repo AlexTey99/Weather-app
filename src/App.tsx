@@ -24,7 +24,6 @@ function App() {
   const [weekDays, setWeekDays] = useState(false);
   const [selectedDay, setSelectedDay] = useState('Select day');
 
-
   const [tempUnit, setTempUnit] = useState('celsius');
   const [windUnit, setWindUnit] = useState('kmh');
   const [precipUnit, setPrecipUnit] = useState('mm');
@@ -32,7 +31,7 @@ function App() {
 
   const APIURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current=temperature_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,weather_code`;
 
-  const { data } = useFetchWeather(APIURL);
+  const { data, loading } = useFetchWeather(APIURL);
 
   const switchSelect = (param: boolean) => {
     setOpen(!param);
@@ -47,7 +46,7 @@ function App() {
 
 
   return (
-    <div className="mainContainer">
+    <div className={`mainContainer ${loading ? 'isLoading' : ''}`}>
 
       <div className="centerContainer">
 
@@ -79,29 +78,37 @@ function App() {
 
         <div className="containerTheTime">
           <div className="containerInfoTime">
+
             <div className="topContainer">
-
-              <CountryAndDay data={data} countryName={selectedCountry} dayIndex={indiceFinal} />
-
-              <CurrentWeatherIcons />
-              <CloudIcons />
-
-              <div className="contianerIconTemperature">
-
-                <div className="icon">
-                  <WeatherIcon code={data?.current.weather_code ?? 0} />
+              {loading ? (
+                <div className="loadingContainer">
+                  <div className="dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <p style={{ color: 'white' }}>Loading...</p>
                 </div>
+              ) : (
+                <>
+                  <CountryAndDay data={data} countryName={selectedCountry} dayIndex={indiceFinal} />
 
-                <div className="temperature">
-                  {indiceFinal === 0
-                    ? `${data?.current.temperature_2m}°`
-                    : `${data?.daily.temperature_2m_max[indiceFinal]}°`
-                  }
-                </div>
+                  <CurrentWeatherIcons />
+                  <CloudIcons />
 
+                  <div className="contianerIconTemperature">
+                    <div className="icon">
+                      <WeatherIcon code={data?.current.weather_code ?? 0} />
+                    </div>
 
-              </div>
-
+                    <div className="temperature">
+                      {indiceFinal === 0
+                        ? `${data?.current.temperature_2m}°`
+                        : `${data?.daily.temperature_2m_max[indiceFinal]}°`}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             <WeatherStats
@@ -110,11 +117,12 @@ function App() {
               tempUnit={tempUnit}
               windUnit={windUnit}
               precipUnit={precipUnit}
+              loading={loading}
             />
 
 
             <h2 className='dailyForecast'>Daily Forecast</h2>
-            <DailyForecast data={data} />
+            <DailyForecast data={data} loading={loading} />
 
           </div>
           <div className="containerHourlyForecast">
@@ -146,8 +154,12 @@ function App() {
 
                   return (
                     <div key={index} className="containerHoursGrade">
-                      <span>{horaFormateada}</span>
-                      <span>{Math.round(temperature)}°</span>
+                      {loading ? null : (
+                        <>
+                          <span>{horaFormateada}</span>
+                          <span>{Math.round(temperature)}°</span>
+                        </>
+                      )}
                     </div>
                   );
                 })}

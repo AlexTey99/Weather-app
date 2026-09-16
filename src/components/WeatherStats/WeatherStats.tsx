@@ -12,10 +12,11 @@ interface WeatherStatsProps {
     tempUnit: string;
     windUnit: string;
     precipUnit: string;
+    loading: boolean;
 }
 
 // 2. Recibimos las tres nuevas props en la función
-function WeatherStats({ weatherData, dayIndex = 0, tempUnit, windUnit, precipUnit }: WeatherStatsProps) {
+function WeatherStats({ weatherData, dayIndex = 0, tempUnit, windUnit, precipUnit, loading }: WeatherStatsProps) {
     const isToday = dayIndex === 0;
 
     // Guardamos los valores base de forma segura para aplicar las fórmulas
@@ -80,15 +81,15 @@ function WeatherStats({ weatherData, dayIndex = 0, tempUnit, windUnit, precipUni
     ];
 
     return (
-        <div className='midleContainer'>
-            {
-                stats.map((stat: StatItem) => (
-                    <div key={stat.title} className='receivingData'>
-                        <span>{stat.title}</span>
-                        <span style={{ fontSize: '22px' }}>{stat.value}</span>
-                    </div>
-                ))
-            }
+        <div className="midleContainer">
+            {stats.map((stat: StatItem) => (
+                <div key={stat.title} className="receivingData">
+                    <span>{stat.title}</span>
+                    <span style={{ fontSize: '22px' }}>
+                        {loading ? '--' : stat.value}
+                    </span>
+                </div>
+            ))}
         </div>
     );
 }

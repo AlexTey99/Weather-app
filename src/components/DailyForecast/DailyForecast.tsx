@@ -1,12 +1,13 @@
 import './DailyForecast.scss';
-import { getSchemaWeather } from '../IconsForecast/IconsForecast'; 
+import { getSchemaWeather } from '../IconsForecast/IconsForecast';
 
-// 1. Definimos que este componente recibe 'data' desde el padre
+
 interface DailyForecastProps {
-    data: any; // Puedes cambiar 'any' por tu tipo 'WeatherData' si lo tienes importado
+    data: any;
+    loading: boolean;
 }
 
-function DailyForecast({ data }: DailyForecastProps) {
+function DailyForecast({ data, loading }: DailyForecastProps) {
 
     // 2. La validación ahora solo vigila la prop entrante
     if (!data || !data.daily || !data.daily.time) {
@@ -25,21 +26,27 @@ function DailyForecast({ data }: DailyForecastProps) {
                 const currentCode = data.daily.weather_code?.[index];
                 const { icon, text } = getSchemaWeather(currentCode);
 
-                const maxTemp = data.daily.temperature_2m_max?.[index] !== undefined 
-                    ? `${Math.round(data.daily.temperature_2m_max[index])}°` 
+                const maxTemp = data.daily.temperature_2m_max?.[index] !== undefined
+                    ? `${Math.round(data.daily.temperature_2m_max[index])}°`
                     : '--';
-                const minTemp = data.daily.temperature_2m_min?.[index] !== undefined 
-                    ? `${Math.round(data.daily.temperature_2m_min[index])}°` 
+                const minTemp = data.daily.temperature_2m_min?.[index] !== undefined
+                    ? `${Math.round(data.daily.temperature_2m_min[index])}°`
                     : '--';
 
                 return (
                     <div key={timeString} className="containerForecast">
-                        <span className='daysWeek'>{dayName}</span>
-                        <span className='weatherVisual' title={text}>{icon}</span>
-                        <div className="gradue">
-                            <span className='maxTemp'>{maxTemp}</span>
-                            <span className='minTemp'>{minTemp}</span>
-                        </div>
+                        {loading ? null : (
+                            <>
+                                <span className="daysWeek">{dayName}</span>
+                                <span className="weatherVisual" title={text}>
+                                    {icon}
+                                </span>
+                                <div className="gradue">
+                                    <span className="maxTemp">{maxTemp}</span>
+                                    <span className="minTemp">{minTemp}</span>
+                                </div>
+                            </>
+                        )}
                     </div>
                 );
             })}

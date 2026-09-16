@@ -31,6 +31,33 @@ body {
   background: colors.$deepNavyBlue;
   overflow: hidden;
 
+  
+  &.isLoading {
+
+    .topContainer,
+    .receivingData,
+    .containerForecast,
+    .containerHoursGrade {
+      background: colors.$DarkNav !important;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.8;
+    }
+
+    100% {
+      opacity: 0.4;
+    }
+  }
+
 
   .centerContainer {
     display: flex;
@@ -101,7 +128,7 @@ body {
 
         .topContainer {
           position: relative;
-          height: auto;
+          height: 160px;
           border-radius: 16px;
           padding: 2.1rem;
           overflow: hidden;
@@ -233,6 +260,7 @@ body {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            height: 40px;
             width: auto;
             padding: 0.7rem;
             flex-shrink: 0;
