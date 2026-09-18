@@ -1,0 +1,47 @@
+@use '/src/styles/colors.scss';
+
+.containerErrors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6rem;
+    
+    position: absolute;
+    top: 2rem;
+
+
+
+    .iconTop {
+        height: 26px;
+    }
+
+    h1 {
+        color: colors.$white;
+    }
+
+    p {
+        display: flex;
+        text-align: center;
+        font-size: 12px;
+        width: 300px;
+        color: colors.$white;
+    }
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: colors.$white;
+        gap: 6px;
+        font-size: 12px;
+        padding: 8px;
+        border-radius: 5px;
+        background: colors.$darkBluePurple;
+        border: 1px solid colors.$darkBluePurple;
+        cursor: pointer;
+
+        .iconButton {
+            height: 12px;
+        }
+    }
+}
