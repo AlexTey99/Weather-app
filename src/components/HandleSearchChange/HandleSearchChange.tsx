@@ -21,6 +21,7 @@ function HandleSearchChange({ setLatitude, setLongitude, setCountryName }: Handl
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
         const value = e.target.value;
         setSearch(value);
 

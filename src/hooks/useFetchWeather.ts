@@ -4,15 +4,17 @@ import type { WeatherData } from '../Types/whaterTypes';
 
 export const useFetchWeather = (url: string) => {
   const [data, setData] = useState<WeatherData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!url) return;
+
     const fetchWeatherData = async () => {
+      if (!data) setLoading(true);
+      setError(null);
+
       try {
-        setLoading(true);
-        setError(null);
-        
         const response = await axios.get<WeatherData>(url);
         setData(response.data);
       } catch (err) {
@@ -26,9 +28,7 @@ export const useFetchWeather = (url: string) => {
       }
     };
 
-    if (url) {
-      fetchWeatherData();
-    }
+    fetchWeatherData();
   }, [url]);
 
   return { data, loading, error };
