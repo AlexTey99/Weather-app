@@ -1,3 +1,5 @@
+@use '../../styles/mixins.scss' as *;
+
 .shape1 {
     width: 500px;
     height: 150px;
@@ -6,6 +8,13 @@
     bottom: -120px;
 
     background: rgba(80, 90, 220, 0.4);
+
+    @include mobile {
+        left: -48px;
+        bottom: -40px;
+        height: 90px;
+        width: 160px;
+    }
 }
 
 .shape2 {
@@ -16,4 +25,11 @@
     bottom: -90px;
 
     background: rgba(80, 90, 220, 0.2);
+
+    @include mobile {
+        right: -100px;
+        bottom: -60px;
+        width: 230px;
+        height: 120px;
+    }
 }

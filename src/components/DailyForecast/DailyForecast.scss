@@ -1,4 +1,5 @@
 @use '/src/styles/colors.scss';
+@use '../../styles/mixins.scss' as *;
 
 .lastContainer {
     display: flex;
@@ -28,6 +29,16 @@
             width: stretch;
             padding: 6px;
             color: colors.$white;
+        }
+    }
+
+     @include mobile {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 400px;
+
+        .containerForecast{
+            width: 104px;
         }
     }
 }

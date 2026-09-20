@@ -1,0 +1,17 @@
+
+$mobile-max: 767px;
+$tablet-max: 1024px;
+
+
+@mixin mobile {
+  @media screen and (max-width: $mobile-max) {
+    @content;
+  }
+}
+
+// Mixin para Escritorio / Pantallas grandes (Desktop-First o ajustes específicos)
+@mixin desktop {
+  @media screen and (min-width: calc($mobile-max + 1px)) {
+    @content;
+  }
+}

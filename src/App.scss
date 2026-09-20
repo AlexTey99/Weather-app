@@ -1,6 +1,11 @@
 @use './styles/colors.scss';
+@use './styles/mixins' as *;
 
-
+@mixin mobileLayout {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
 
 @font-face {
   font-family: "Bricolage Grotesque";
@@ -31,7 +36,7 @@ body {
   background: colors.$deepNavyBlue;
   overflow: hidden;
 
-  
+
   &.isLoading {
 
     .topContainer,
@@ -276,4 +281,92 @@ body {
     }
   }
 
+  @include mobileLayout {
+    height: 100svh;
+    padding: 8px 12px;
+    overflow-y: auto;
+
+    .centerContainer {
+      width: 100%;
+      height: auto;
+      justify-content: flex-start;
+      gap: 20px;
+
+      .headerContainer {
+        width: 100%;
+        padding: 6px 24px 0px 10px;
+        margin-bottom: 0;
+
+        img {
+          max-width: 140px;
+        }
+      }
+
+      .containerTheTime {
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        margin-bottom: 0;
+
+        .containerInfoTime,
+        .containerHourlyForecast {
+          width: 100%;
+        }
+
+        .containerInfoTime {
+          .topContainer {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+            height: 250px;
+            padding-bottom: 4rem;
+            border-radius: 16px;
+
+            .contianerIconTemperature {
+              margin-top: 1rem;
+              gap: 20px;
+
+              .icon {
+                font-size: 50px;
+              }
+
+              .temperature {
+                font-size: 60px;
+              }
+            }
+          }
+        }
+
+        .containerHourlyForecast {
+          padding: 14px;
+
+          .containerTittleAndSelect {
+            width: 100%;
+            gap: 10px;
+            padding: 6px;
+
+            h2 {
+              font-size: 14px;
+            }
+
+            .buttonSelectWeek {
+              width: 90px;
+            }
+
+            .dropdownMenu {
+              position: absolute;
+              top: 400px;
+              right: 30px;
+              width: 160px;
+            }
+          }
+
+          .containerHours {
+            padding-right: 4px;
+          }
+        }
+      }
+    }
+  }
 }
