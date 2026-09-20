@@ -22,7 +22,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
   font-family: "Bricolage Grotesque", sans-serif;
 }
 
@@ -119,7 +118,6 @@ body {
     .containerTheTime {
       display: flex;
       justify-content: space-between;
-      width: 1000px;
       border-radius: 30px;
       margin-bottom: auto;
 
@@ -281,7 +279,7 @@ body {
     }
   }
 
-  @include mobileLayout {
+  @include mobile {
     height: 100svh;
     padding: 8px 12px;
     overflow-y: auto;
