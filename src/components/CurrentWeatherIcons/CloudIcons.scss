@@ -1,7 +1,7 @@
 @use '../../styles/mixins.scss' as *;
 
 .shape1 {
-    width: 500px;
+    width: min(42vw, 500px);
     height: 150px;
 
     left: -100px;
@@ -10,15 +10,16 @@
     background: rgba(80, 90, 220, 0.4);
 
     @include mobile {
-        left: -48px;
+        left: -60px;
         bottom: -40px;
         height: 90px;
-        width: 160px;
+        width: 150px;
+        max-width: 45vw;
     }
 }
 
 .shape2 {
-    width: 300px;
+    width: min(28vw, 300px);
     height: 120px;
 
     right: -100px;
@@ -27,9 +28,10 @@
     background: rgba(80, 90, 220, 0.2);
 
     @include mobile {
-        right: -100px;
+        right: -70px;
         bottom: -60px;
-        width: 230px;
-        height: 120px;
+        width: 170px;
+        max-width: 50vw;
+        height: 110px;
     }
 }

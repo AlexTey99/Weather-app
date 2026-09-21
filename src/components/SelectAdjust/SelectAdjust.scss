@@ -2,12 +2,14 @@
 @use '../../styles/mixins.scss' as *;
 
 .popupWindow {
-    position: relative;
-    right: 80px;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
     width: 170px;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 0;
     border-radius: 10px;
+    z-index: 30;
 
     background: colors.$darkBluePurple;
 
@@ -73,5 +75,6 @@
 
     @include mobile {
         z-index: 2;
+        right: -1.3rem;
     }
 }

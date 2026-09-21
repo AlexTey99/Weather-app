@@ -34,11 +34,13 @@
 
      @include mobile {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
         max-width: 400px;
 
         .containerForecast{
-            width: 104px;
+            width: 100%;
+            min-width: 0;
         }
     }
 }

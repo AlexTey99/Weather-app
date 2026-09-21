@@ -21,7 +21,7 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Bricolage Grotesque", sans-serif;
 }
 
@@ -30,10 +30,11 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   padding: 10px 0px 10px 0px;
   background: colors.$deepNavyBlue;
-  overflow: hidden;
+  overflow-x: hidden;
 
 
   &.isLoading {
@@ -67,7 +68,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
     width: 100%;
     max-width: 1200px;
     flex-direction: column;
@@ -87,8 +89,10 @@ body {
       }
 
       .dropdownMenu {
+        position: relative;
         height: 30px;
         width: 70px;
+        z-index: 20;
 
         .containerIconsAndButton {
           display: flex;
@@ -126,6 +130,7 @@ body {
         flex-direction: column;
         height: 100%;
         width: 65%;
+        min-width: 0;
         border-radius: 30px;
 
 
@@ -182,11 +187,13 @@ body {
         flex-direction: column;
         height: fit-content;
         width: 30%;
+        min-width: 0;
         padding: 18px;
         border-radius: 20px;
         background: colors.$DarkNav;
 
         .containerTittleAndSelect {
+          position: relative;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -214,12 +221,12 @@ body {
           }
 
           .dropdownMenu {
-            position: relative;
-            right: 200px;
-            top: 140px;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
             width: 180px;
             padding: 10px;
-            margin-top: 10px;
+            margin-top: 0;
             border-radius: 8px;
             border: 1px solid colors.$MutedIndigo;
             background-color: colors.$darkBluePurple;
@@ -228,6 +235,7 @@ body {
             align-items: stretch;
             box-shadow: 0 4px 12px colors.$black;
             overflow: hidden;
+            z-index: 10;
 
             button {
               display: flex;
@@ -304,11 +312,13 @@ body {
         flex-direction: column;
         gap: 16px;
         width: 100%;
+        max-width: 100%;
         margin-bottom: 0;
 
         .containerInfoTime,
         .containerHourlyForecast {
           width: 100%;
+          max-width: 100%;
         }
 
         .containerInfoTime {
@@ -354,8 +364,7 @@ body {
 
             .dropdownMenu {
               position: absolute;
-              top: 400px;
-              right: 30px;
+              right: 0.4rem;
               width: 160px;
             }
           }
